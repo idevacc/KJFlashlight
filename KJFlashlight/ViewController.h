@@ -7,7 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LEDControl.h"
 
 @interface ViewController : UIViewController
+
+@property (strong, nonatomic) LEDControl* led;
+
+@property (weak, nonatomic) IBOutlet UIButton *onButton;
+@property (weak, nonatomic) IBOutlet UIButton *offButton;
+@property (weak, nonatomic) IBOutlet UIButton *flashButton;
+
+- (IBAction)onButtonWasTapped:(id)sender;
+- (IBAction)offButtonWasTapped:(id)sender;
+- (IBAction)flashButtonWasTapped:(id)sender;
+
+- (void)applicationDidBecomeActive;
+- (void)applicationWillResignActive;
 
 @end
