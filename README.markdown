@@ -1,6 +1,6 @@
 ## KJFlashlight
 
-I got fed up with the complexities of all the various iPhone flashlight apps I've tried, so I whipped up my own.
+I got fed up with the complexities of the various iPhone flashlight apps I've tried, so I whipped up my own.
 
 It has three buttons to control the LED on the back of the phone:
 
@@ -10,7 +10,7 @@ It has three buttons to control the LED on the back of the phone:
 
 That's it.
 
-The Xcode project is currently set up to require iOS 6.  (It will probably compile and run fine in older versions of iOS, but I haven't tried.)
+The Xcode project is set up to require iOS 6.  (It will probably compile and run with older versions of iOS, but I haven't tried.)
 
 
 ### License
