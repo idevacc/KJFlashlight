@@ -1,12 +1,12 @@
 ## KJFlashlight
 
-I got fed up with the complexities of the various iPhone flashlight apps I've tried, so I whipped up my own.
+I got fed up with the complexities of the various iPhone flashlight apps I've tried, so I whipped up my own dead-simple flashlight app.
 
-It has three buttons to control the LED on the back of the phone:
+It has three buttons that control the LED on the back of the phone:
 
 - On
 - Off
-- Flash
+- Flash (once per second)
 
 That's it.
 
