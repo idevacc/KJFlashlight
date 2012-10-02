@@ -11,7 +11,7 @@
 
 @interface ViewController : UIViewController
 
-@property (strong, nonatomic) LEDControl* led;
+@property (strong, nonatomic) LEDControl* ledControl;
 
 @property (weak, nonatomic) IBOutlet UIButton *onButton;
 @property (weak, nonatomic) IBOutlet UIButton *offButton;
