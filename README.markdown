@@ -11,6 +11,8 @@ It has three buttons to control the LED on the back of the phone:
 That's it.
 
 The Xcode project is set up to require iOS 6.  (It will probably compile and run with older versions of iOS, but I haven't tried.)
+Also, the Info.plist specifies `camera-flash` as a required device capability, so you won't be able to run it on a device that does
+not have an LED flash.
 
 
 ### License
