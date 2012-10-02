@@ -8,10 +8,15 @@
 
 #import "LEDControl.h"
 
+
+const NSTimeInterval flashTimerInterval = 0.5;
+
+
 @interface LEDControl ()
 
-@property (nonatomic) NSTimer *timer;
 @property (nonatomic) BOOL isTorchOn;
+
+@property (nonatomic) NSTimer *flashTimer;
 
 @end
 
@@ -20,64 +25,57 @@
 
 - (void)setMode:(LEDMode)mode {
     if (mode != _mode) {
-        
         [self stopFlash];
         
         _mode = mode;
         
         switch (mode) {
-            case ledOn:
-                [self turnTorchOn];
+            case LEDMode_On:
+                [self setTorchOn:YES];
                 break;
-            case ledFlash:
+                
+            case LEDMode_Flash:
                 [self startFlash];
                 break;
-            case ledOff:
+                
+            case LEDMode_Off:
             default:
-                [self turnTorchOff];
+                [self setTorchOn:NO];
                 break;
         }
     }
 }
 
-- (void)turnTorchOn {
+- (void)setTorchOn:(BOOL)on {
     auto device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     [device lockForConfiguration:nil];
-    device.torchMode = AVCaptureTorchModeOn;
+    device.torchMode = on? AVCaptureTorchModeOn : AVCaptureTorchModeOff;
     [device unlockForConfiguration];
     
-    self.isTorchOn = YES;
+    self.isTorchOn = on;
 }
 
-- (void)turnTorchOff {
-    auto device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    [device lockForConfiguration:nil];
-    device.torchMode = AVCaptureTorchModeOff;
-    [device unlockForConfiguration];
-    
-    self.isTorchOn = NO;
-}
+
+#pragma mark - Flash timer
 
 - (void)startFlash {
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.5
-                                                  target:self
-                                                selector:@selector(flashTimerDidFire:)
-                                                userInfo:nil
-                                                 repeats:YES];
+    self.flashTimer = [NSTimer scheduledTimerWithTimeInterval:flashTimerInterval
+                                                       target:self
+                                                     selector:@selector(flashTimerDidFire:)
+                                                     userInfo:nil
+                                                      repeats:YES];
 }
 
 - (void)stopFlash {
-    if (self.timer != nil) {
-        [self.timer invalidate];
-        self.timer = nil;
+    if (self.flashTimer != nil) {
+        [self.flashTimer invalidate];
+        self.flashTimer = nil;
     }
 }
 
 - (void)flashTimerDidFire:(NSTimer *)timer {
-    if (self.isTorchOn)
-        [self turnTorchOff];
-    else
-        [self turnTorchOn];
+    // Toggle torch state
+    [self setTorchOn:(!self.isTorchOn)];
 }
 
 @end

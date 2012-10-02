@@ -7,8 +7,16 @@
 //
 
 #import "ViewController.h"
+#import "LEDControl.h"
 
 NSString * const LEDModeKey = @"LEDMode";
+
+
+@interface ViewController ()
+
+@property (strong, nonatomic) LEDControl* ledControl;
+
+@end
 
 
 @implementation ViewController
@@ -18,11 +26,11 @@ NSString * const LEDModeKey = @"LEDMode";
     [super viewDidLoad];
 }
 
-- (void)setMode:(LEDMode)mode {
+- (void)setLEDMode:(LEDMode)mode {
     // Select the appropriate button
-    [self.onButton setSelected:(mode == ledOn)];
-    [self.offButton setSelected:(mode == ledOff)];
-    [self.flashButton setSelected:(mode == ledFlash)];
+    [self.onButton setSelected:(mode == LEDMode_On)];
+    [self.offButton setSelected:(mode == LEDMode_Off)];
+    [self.flashButton setSelected:(mode == LEDMode_Flash)];
     
     // Turn the LED on/off
     [self.ledControl setMode:mode];
@@ -30,10 +38,10 @@ NSString * const LEDModeKey = @"LEDMode";
 
 - (void)applicationDidBecomeActive {
     // Restore whatever state we had last time we were active.
-    // (On first run, the state will default to 0, which is ledOff.)
+    // (On first run, the state will default to 0, which is LEDMode_Off.)
     auto savedState = [NSUserDefaults standardUserDefaults];
     LEDMode savedMode = (LEDMode)[savedState integerForKey:LEDModeKey];
-    [self setMode:savedMode];
+    [self setLEDMode:savedMode];
 }
 
 - (void)applicationWillResignActive {
@@ -42,19 +50,19 @@ NSString * const LEDModeKey = @"LEDMode";
     [savedState setInteger:[self.ledControl mode] forKey:LEDModeKey];
     
     // Turn the LED off (iOS will turn it off automatically, and we want app state to match.)
-    [self.ledControl setMode:ledOff];
+    [self.ledControl setMode:LEDMode_Off];
 }
 
 - (IBAction)onButtonWasTapped:(id)sender {
-    [self setMode:ledOn];
+    [self setLEDMode:LEDMode_On];
 }
 
 - (IBAction)offButtonWasTapped:(id)sender {
-    [self setMode:ledOff];
+    [self setLEDMode:LEDMode_Off];
 }
 
 - (IBAction)flashButtonWasTapped:(id)sender {
-    [self setMode:ledFlash];
+    [self setLEDMode:LEDMode_Flash];
 }
 
 @end

@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LEDControl.h"
 
 @interface ViewController : UIViewController
-
-@property (strong, nonatomic) LEDControl* ledControl;
 
 @property (weak, nonatomic) IBOutlet UIButton *onButton;
 @property (weak, nonatomic) IBOutlet UIButton *offButton;

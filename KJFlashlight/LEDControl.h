@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+// Values for LEDControl "mode" property
 enum LEDMode {
-    ledOff,
-    ledOn,
-    ledFlash
+    LEDMode_Off,
+    LEDMode_On,
+    LEDMode_Flash
 };
+
 
 @interface LEDControl : NSObject
 
