@@ -12,17 +12,16 @@
 NSString * const LEDModeKey = @"LEDMode";
 
 
-@interface ViewController ()
-
-@property (strong, nonatomic) LEDControl* ledControl;
-
+@interface ViewController () {
+    LEDControl* _ledControl;
+}
 @end
 
 
 @implementation ViewController
 
 - (void)viewDidLoad {
-    self.ledControl = [[LEDControl alloc] init];
+    _ledControl = [[LEDControl alloc] init];
     [super viewDidLoad];
 }
 
@@ -33,7 +32,7 @@ NSString * const LEDModeKey = @"LEDMode";
     [self.flashButton setSelected:(mode == LEDMode_Flash)];
     
     // Turn the LED on/off
-    [self.ledControl setMode:mode];
+    [_ledControl setMode:mode];
 }
 
 - (void)applicationDidBecomeActive {
@@ -47,10 +46,10 @@ NSString * const LEDModeKey = @"LEDMode";
 - (void)applicationWillResignActive {
     // Save state to be restored when we are active again
     auto savedState = [NSUserDefaults standardUserDefaults];
-    [savedState setInteger:[self.ledControl mode] forKey:LEDModeKey];
+    [savedState setInteger:[_ledControl mode] forKey:LEDModeKey];
     
     // Turn the LED off (iOS will turn it off automatically, and we want app state to match.)
-    [self.ledControl setMode:LEDMode_Off];
+    [_ledControl setMode:LEDMode_Off];
 }
 
 - (IBAction)onButtonWasTapped:(id)sender {

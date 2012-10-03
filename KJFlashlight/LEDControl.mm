@@ -12,12 +12,10 @@
 const NSTimeInterval flashTimerInterval = 0.5;
 
 
-@interface LEDControl ()
-
-@property (nonatomic) BOOL isTorchOn;
-
-@property (nonatomic) NSTimer *flashTimer;
-
+@interface LEDControl () {
+    BOOL _isTorchOn;
+    NSTimer *_flashTimer;
+}
 @end
 
 
@@ -52,30 +50,30 @@ const NSTimeInterval flashTimerInterval = 0.5;
     device.torchMode = on? AVCaptureTorchModeOn : AVCaptureTorchModeOff;
     [device unlockForConfiguration];
     
-    self.isTorchOn = on;
+    _isTorchOn = on;
 }
 
 
 #pragma mark - Flash timer
 
 - (void)startFlash {
-    self.flashTimer = [NSTimer scheduledTimerWithTimeInterval:flashTimerInterval
-                                                       target:self
-                                                     selector:@selector(flashTimerDidFire:)
-                                                     userInfo:nil
-                                                      repeats:YES];
+    _flashTimer = [NSTimer scheduledTimerWithTimeInterval:flashTimerInterval
+                                                   target:self
+                                                 selector:@selector(flashTimerDidFire:)
+                                                 userInfo:nil
+                                                  repeats:YES];
 }
 
 - (void)stopFlash {
-    if (self.flashTimer != nil) {
-        [self.flashTimer invalidate];
-        self.flashTimer = nil;
+    if (_flashTimer != nil) {
+        [_flashTimer invalidate];
+        _flashTimer = nil;
     }
 }
 
 - (void)flashTimerDidFire:(NSTimer *)timer {
     // Toggle torch state
-    [self setTorchOn:(!self.isTorchOn)];
+    [self setTorchOn:(!_isTorchOn)];
 }
 
 @end
