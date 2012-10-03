@@ -110,7 +110,6 @@
 		4EF793E5161B12FA0044CCA4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4E232DE1161BBC64009892D4 /* KJFlashlightIcon.pxm */,
 				4EF793F4161B12FB0044CCA4 /* Default-568h@2x.png */,
 				4EF793F0161B12FB0044CCA4 /* Default.png */,
 				4EF793F2161B12FB0044CCA4 /* Default@2x.png */,
@@ -119,6 +118,7 @@
 				4EF793EC161B12FB0044CCA4 /* KJFlashlight-Prefix.pch */,
 				4E232DD9161BBB80009892D4 /* KJFlashlightIcon-114x114.png */,
 				4E232DD8161BBB80009892D4 /* KJFlashlightIcon-57x57.png */,
+				4E232DE1161BBC64009892D4 /* KJFlashlightIcon.pxm */,
 				4EF793EA161B12FA0044CCA4 /* main.mm */,
 			);
 			name = "Supporting Files";
